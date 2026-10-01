@@ -1,0 +1,29 @@
+repos:
+  - repo: local
+    hooks:
+      - id: format
+        name: "Ruff Format"
+        entry: uv --directory 01 run ruff format
+        language: system
+        types: [python]
+        files: ^.*\.py$
+        pass_filenames: false
+        stages: [pre-commit]
+
+      - id: lint
+        name: "Ruff Lint"
+        entry: uv --directory 01 run ruff check --fix
+        language: system
+        types: [python]
+        files: ^.*\.py$
+        pass_filenames: false
+        stages: [pre-commit]
+
+      - id: type-check
+        name: "Type Checking (ty)"
+        entry: uv --directory 01 run ty check
+        language: system
+        types: [python]
+        files: ^.*\.py$
+        pass_filenames: false
+        stages: [pre-push]
